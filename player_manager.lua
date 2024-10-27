@@ -8,7 +8,7 @@ end
 
 function update_player_location()
     for i=1,#valid_moves do 
-        if btn(valid_moves[i]) then
+        if btnp(valid_moves[i]) then
             move_player(valid_moves[i])
         end
     end
