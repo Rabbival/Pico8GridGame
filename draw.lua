@@ -1,43 +1,38 @@
-
 function _draw()
     cls()
-    if state == in_progress then
-      map(0, 0, 0, 0, 16, 16)
-      update_bullet_visuals(bullets)
-      spr(princess_bakod.sprite, princess_bakod.x, ground_height) 
-        update_unit_visuals(player)
-        for enemy in all(enemies) do
-         update_unit_visuals(enemy)
+    draw_map()
+    draw_player()
+end
+
+function draw_map()
+    for row_index=1,MAP_ROW_COUNT do
+        row = map[row_index]
+        for col_index=1,MAP_COL_COUNT do
+            draw_tile_in_index(row[col_index], row_index, col_index)
         end
-        for grass_block in all(grass_blocks) do
-          update_unit_visuals(grass_block)
-        end
-       score += 1
-       print("score: "..score)
-    elseif state == start_end_game then
-       sfx(1)
-       state = game_over
-    elseif state == game_over then
-      print_game_over_message()
     end
- end 
- 
- function print_game_over_message()
-   print("\135 game over \135")
-   print("your final score was: "..score)
-   print("press action to try again")
- end
- 
- function update_bullet_visuals(bullets)
-   for bullet in all(bullets) do
-      spr(bullet_sprite, bullet.x, ground_height - 1, 1, 1, bullet.flipped, false) 
-   end
- end
- 
- function update_unit_visuals(unit) 
-   should_flip = false
-   if unit.face_direction != unit.initial_direction then
-      should_flip = true
-   end
-    spr(unit.sprite, unit.x, unit.y, 1, 1, should_flip, false) 
- end
+end
+
+function draw_tile_in_index(tile_identifier, row_index, col_index)
+    if tile_identifier == GRASS_TILE_IDNTIFIER then
+        sprite_index = GRASS_TILE_SPRITE
+    elseif tile_identifier == SAND_TILE_IDNTIFIER then 
+        sprite_index = SAND_TILE_SPRITE
+    elseif tile_identifier == WATER_TILE_IDNTIFIER then
+        sprite_index = WATER_TILE_SPRITE
+    end
+    x = world_from_tile_axis(col_index)
+    y = world_from_tile_axis(row_index)
+    spr(sprite_index, x, y) 
+end
+
+function draw_player()
+    if player.form == GRASS_TILE_IDNTIFIER then
+        sprite_index = PLAYER_GRASS_SPRITE
+    elseif player.form == SAND_TILE_IDNTIFIER then 
+        sprite_index = PLAYER_DESERT_SPRITE
+    elseif player.form == WATER_TILE_IDNTIFIER then
+        sprite_index = PLAYER_WATER_SPRITE
+    end
+    spr(sprite_index, world_from_tile_axis(player.col), world_from_tile_axis(player.row)) 
+end
