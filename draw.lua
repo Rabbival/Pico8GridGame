@@ -2,6 +2,9 @@ function _draw()
     cls()
     draw_map()
     draw_player()
+    draw_enemies()
+    -- print(debugVal1)
+    -- print(debugVal2)
 end
 
 function draw_map()
@@ -28,11 +31,39 @@ end
 
 function draw_player()
     if player.form == GRASS_TILE_IDNTIFIER then
-        sprite_index = PLAYER_GRASS_SPRITE
-    elseif player.form == SAND_TILE_IDNTIFIER then 
-        sprite_index = PLAYER_DESERT_SPRITE
-    elseif player.form == WATER_TILE_IDNTIFIER then
-        sprite_index = PLAYER_WATER_SPRITE
+        if player.heading_direction == UP then
+            sprite_index = PLAYER_GRASS_BACK_SPRITE
+        else
+            sprite_index = PLAYER_GRASS_SPRITE
+        end
+    end
+    if player.form == SAND_TILE_IDNTIFIER then 
+        if player.heading_direction == UP then
+            sprite_index = PLAYER_DESERT_BACK_SPRITE
+        else
+            sprite_index = PLAYER_DESERT_SPRITE
+        end
+    end
+    if player.form == WATER_TILE_IDNTIFIER then
+        if player.heading_direction == UP then
+            sprite_index = PLAYER_WATER_BACK_SPRITE
+        elseif player.heading_direction == DOWN then
+            sprite_index = PLAYER_WATER_FORWARD_SPRITE
+        elseif player.heading_direction == LEFT then
+            sprite_index = PLAYER_WATER_LEFT_SPRITE
+        else
+            sprite_index = PLAYER_WATER_RIGHT_SPRITE
+        end
     end
     spr(sprite_index, world_from_tile_axis(player.col), world_from_tile_axis(player.row)) 
+end
+
+function draw_enemies()
+    for enemy in all(enemies) do 
+        draw_enemy(enemy)
+    end
+end
+
+function draw_enemy(enemy)
+    spr(ENEMY_SPRITE, world_from_tile_axis(enemy.col), world_from_tile_axis(enemy.row)) 
 end

@@ -1,5 +1,6 @@
 PLAYER_INITIAL_ROW = 5
 PLAYER_INITAL_COL = 5
+SHOOT_BUTTON = 4
 
-up=2 right=1 down=3 left=0
-valid_moves = {up,right,down,left}
+UP=2 RIGHT=1 DOWN=3 LEFT=0
+DIRECTIONS = {UP,RIGHT,DOWN,LEFT}

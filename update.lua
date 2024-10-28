@@ -1,4 +1,9 @@
 function _update()
-    update_player_location()
-    update_player_form()
+    update_player()
+    update_enemies()
+end
+
+function destroy(unit)
+    del(bullets, unit)
+    del(enemies, unit)
 end
