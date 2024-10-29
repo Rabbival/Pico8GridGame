@@ -2,20 +2,25 @@ pico-8 cartridge // http://www.pico-8.com
 version 42
 __lua__
 #include init.lua
-#include update.lua
+#include map_generation.lua
+
+#include update/update.lua
+#include update/player_manager.lua
+#include update/enemy_manager.lua
+#include update/bullet_manager.lua
+#include update/collision_manager.lua
+
 #include draw.lua
-#include common_logic/map_logic.lua
-#include consts/map_consts.lua
-#include map_gen.lua
-#include consts/sprite_indexes.lua
-#include consts/player_consts.lua
-#include player_manager.lua
-#include consts/enemy_consts.lua
-#include enemy_manager.lua
+
 #include common_logic/randomizer.lua
 #include common_logic/path_maker.lua
-#include bullet_manager.lua
 #include common_logic/data_structures.lua
+#include common_logic/map_logic.lua
+
+#include consts/enemy_consts.lua
+#include consts/map_consts.lua
+#include consts/sprite_indexes.lua
+#include consts/player_consts.lua
 __gfx__
 00000000333333339999999911111111000000000044440000000000000000000000000000444400000000000000000000000000000000000000000000000000
 000000003b333b3399a9999911111111000000000444444000000000000000000000000004444440000000000000000000000000000000000000000000000000
