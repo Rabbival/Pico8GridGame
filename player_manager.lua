@@ -13,6 +13,7 @@ function update_player()
     player.acts_this_turn = 0
     update_player_location()
     update_player_form()
+    listen_for_shooting_requests()
 end
 
 
@@ -32,6 +33,14 @@ end
 
 function update_player_form()
     player.form = map[player.row][player.col]
+end
+
+function listen_for_shooting_requests()
+    desired_bullet_location = relative_location(player.heading_direction, player)
+    if btnp(SHOOT_BUTTON) and valid_tile(desired_bullet_location) then
+        player.acts_this_turn += 1
+        spawn_bullet(desired_bullet_location, player.heading_direction, player.form)
+    end
 end
 
 function player_location()

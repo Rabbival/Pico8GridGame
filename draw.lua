@@ -3,6 +3,7 @@ function _draw()
     draw_map()
     draw_player()
     draw_enemies()
+    draw_bullets()
     -- print(debugVal1)
     -- print(debugVal2)
 end
@@ -21,7 +22,7 @@ function draw_tile_in_index(tile_identifier, row_index, col_index)
         sprite_index = GRASS_TILE_SPRITE
     elseif tile_identifier == SAND_TILE_IDNTIFIER then 
         sprite_index = SAND_TILE_SPRITE
-    elseif tile_identifier == WATER_TILE_IDNTIFIER then
+    else
         sprite_index = WATER_TILE_SPRITE
     end
     x = world_from_tile_axis(col_index)
@@ -66,4 +67,21 @@ end
 
 function draw_enemy(enemy)
     spr(ENEMY_SPRITE, world_from_tile_axis(enemy.col), world_from_tile_axis(enemy.row)) 
+end
+
+function draw_bullets()
+    for bullet in all(bullets) do 
+        draw_bullet(bullet)
+    end
+end
+
+function draw_bullet(bullet)
+    if bullet.type == GRASS_TILE_IDNTIFIER then
+        sprite_index = GRASS_BULLET_SPRITE
+    elseif bullet.type == SAND_TILE_IDNTIFIER then 
+        sprite_index = SAND_BULLET_SPRITE
+    elseif bullet.type == WATER_TILE_IDNTIFIER then
+        sprite_index = WATER_BULLET_SPRITE
+    end
+    spr(sprite_index, world_from_tile_axis(bullet.col), world_from_tile_axis(bullet.row)) 
 end

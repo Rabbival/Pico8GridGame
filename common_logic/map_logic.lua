@@ -3,7 +3,7 @@ function world_from_tile_axis(axis_index)
 end
 
 function move_unit(direction, unit)
-    desired_location = desire_location_by_direction(direction, unit)
+    desired_location = relative_location(direction, unit)
     if valid_tile(desired_location) then 
         unit.row = desired_location.row
         unit.col = desired_location.col
@@ -12,7 +12,7 @@ function move_unit(direction, unit)
     end
 end
 
-function desire_location_by_direction(direction, unit)
+function relative_location(direction, unit)
     desired_location = {}
     desired_location.row = unit.row
     desired_location.col = unit.col
