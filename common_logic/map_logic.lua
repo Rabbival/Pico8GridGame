@@ -2,17 +2,17 @@ function world_from_tile_axis(axis_index)
     return MAP_FIRST_TILE_OFFSET + axis_index * MAP_CELL_SIZE
 end
 
-function move_unit(direction, unit)
-    desired_location = relative_location(direction, unit)
+function move_unit(direction, unit, delta)
+    desired_location = relative_location(direction, unit, delta)
     if valid_tile(desired_location) then 
         unit.row = desired_location.row
         unit.col = desired_location.col
     elseif unit.map_exit_policy == DESPAWN then
-        destroy(unit)
+        despawn(unit)
     end
 end
 
-function relative_location(direction, unit)
+function relative_location(direction, unit, delta)
     desired_location = {}
     desired_location.row = unit.row
     desired_location.col = unit.col
@@ -34,4 +34,8 @@ function valid_tile(location)
     else
         return false
     end
+end
+
+function on_same_tile(first, second) 
+    return (first.col == second.col and first.row == second.row)
 end

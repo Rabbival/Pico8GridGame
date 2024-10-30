@@ -25,7 +25,7 @@ function update_player_location()
             player.acts_this_turn += 1
             player.just_moved = true
             player.heading_direction = direction
-            move_unit(direction, player)
+            move_unit(direction, player, 1)
             break
         end
     end
@@ -36,7 +36,7 @@ function update_player_form()
 end
 
 function listen_for_shooting_requests()
-    desired_bullet_location = relative_location(player.heading_direction, player)
+    desired_bullet_location = relative_location(player.heading_direction, player, 1)
     if btnp(SHOOT_BUTTON) and valid_tile(desired_bullet_location) then
         player.acts_this_turn += 1
         spawn_bullet(desired_bullet_location, player.heading_direction, player.form)

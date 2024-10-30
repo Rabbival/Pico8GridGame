@@ -28,11 +28,11 @@ end
 function initialize_tile_count_dictionary()
     tile_count_dictionary = {}
     grass_count = rnd_whole_exc(MIN_GRASS_PER_ROW, MAX_GRASS_PER_ROW)
-    add_key_value_to_dictionary(tile_count_dictionary, GRASS_TILE_IDNTIFIER, grass_count)
+    add_key_value_to_dictionary(tile_count_dictionary, GRASS_TYPE, grass_count)
     sand_count = rnd_whole_exc(MIN_SAND_PER_ROW, MAX_SAND_PER_ROW)
-    add_key_value_to_dictionary(tile_count_dictionary, SAND_TILE_IDNTIFIER, sand_count)
+    add_key_value_to_dictionary(tile_count_dictionary, SAND_TYPE, sand_count)
     water_count = MAP_COL_COUNT - (grass_count + sand_count)
-    add_key_value_to_dictionary(tile_count_dictionary, WATER_TILE_IDNTIFIER, water_count)
+    add_key_value_to_dictionary(tile_count_dictionary, WATER_TYPE, water_count)
     return tile_count_dictionary
 end
 

@@ -13,7 +13,8 @@ function spawn_enemy()
     enemy.path = determine_path_to_player(enemy)
     enemy.next_move_index = 1
     enemy.heading_direction = enemy.path[1]
-    player.map_exit_policy = BLOCK
+    enemy.map_exit_policy = DESPAWN
+    enemy.type = NEUTRAL
     return enemy
 end
 
@@ -43,8 +44,9 @@ end
 function move_enemy_along_path(enemy)
     if enemy.next_move_index <= count(enemy.path) do 
         next_move_direction = enemy.path[enemy.next_move_index]
-        move_unit(next_move_direction, enemy)
+        move_unit(next_move_direction, enemy, 1)
         enemy.next_move_index += 1
+        sfx(ENEMY_STEP_SOUND)
     end
 end
 

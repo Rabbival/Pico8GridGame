@@ -1,11 +1,13 @@
 function _draw()
     cls()
-    draw_map()
-    draw_player()
-    draw_enemies()
-    draw_bullets()
-    -- print(debugVal1)
-    -- print(debugVal2)
+    print_text_by_game_state()
+    if app_state == GAME_PLAYING then 
+        draw_map()
+        draw_player()
+        draw_enemies()
+        draw_bullets()
+        draw_despawn_sprites()
+    end
 end
 
 function draw_map()
@@ -18,9 +20,9 @@ function draw_map()
 end
 
 function draw_tile_in_index(tile_identifier, row_index, col_index)
-    if tile_identifier == GRASS_TILE_IDNTIFIER then
+    if tile_identifier == GRASS_TYPE then
         sprite_index = GRASS_TILE_SPRITE
-    elseif tile_identifier == SAND_TILE_IDNTIFIER then 
+    elseif tile_identifier == SAND_TYPE then 
         sprite_index = SAND_TILE_SPRITE
     else
         sprite_index = WATER_TILE_SPRITE
@@ -31,21 +33,21 @@ function draw_tile_in_index(tile_identifier, row_index, col_index)
 end
 
 function draw_player()
-    if player.form == GRASS_TILE_IDNTIFIER then
+    if player.form == GRASS_TYPE then
         if player.heading_direction == UP then
             sprite_index = PLAYER_GRASS_BACK_SPRITE
         else
             sprite_index = PLAYER_GRASS_SPRITE
         end
     end
-    if player.form == SAND_TILE_IDNTIFIER then 
+    if player.form == SAND_TYPE then 
         if player.heading_direction == UP then
-            sprite_index = PLAYER_DESERT_BACK_SPRITE
+            sprite_index = PLAYER_SAND_BACK_SPRITE
         else
-            sprite_index = PLAYER_DESERT_SPRITE
+            sprite_index = PLAYER_SAND_SPRITE
         end
     end
-    if player.form == WATER_TILE_IDNTIFIER then
+    if player.form == WATER_TYPE then
         if player.heading_direction == UP then
             sprite_index = PLAYER_WATER_BACK_SPRITE
         elseif player.heading_direction == DOWN then
@@ -66,7 +68,16 @@ function draw_enemies()
 end
 
 function draw_enemy(enemy)
-    spr(ENEMY_SPRITE, world_from_tile_axis(enemy.col), world_from_tile_axis(enemy.row)) 
+    if enemy.type == GRASS_TYPE then
+        sprite_index = ENEMY_GRASS_SPRITE
+    elseif enemy.type == SAND_TYPE then 
+        sprite_index = ENEMY_SAND_SPRITE
+    elseif enemy.type == WATER_TYPE then
+        sprite_index = ENEMY_WATER_SPRITE
+    else 
+        sprite_index = ENEMY_NEUTRAL_SPRITE
+    end
+    spr(sprite_index, world_from_tile_axis(enemy.col), world_from_tile_axis(enemy.row)) 
 end
 
 function draw_bullets()
@@ -76,12 +87,18 @@ function draw_bullets()
 end
 
 function draw_bullet(bullet)
-    if bullet.type == GRASS_TILE_IDNTIFIER then
+    if bullet.type == GRASS_TYPE then
         sprite_index = GRASS_BULLET_SPRITE
-    elseif bullet.type == SAND_TILE_IDNTIFIER then 
+    elseif bullet.type == SAND_TYPE then 
         sprite_index = SAND_BULLET_SPRITE
-    elseif bullet.type == WATER_TILE_IDNTIFIER then
+    elseif bullet.type == WATER_TYPE then
         sprite_index = WATER_BULLET_SPRITE
     end
     spr(sprite_index, world_from_tile_axis(bullet.col), world_from_tile_axis(bullet.row)) 
+end
+
+function draw_despawn_sprites()
+    for despawn_sprite in all(despawn_sprites) do 
+        spr(despawn_sprite.sprite, world_from_tile_axis(despawn_sprite.col), world_from_tile_axis(despawn_sprite.row)) 
+    end
 end
