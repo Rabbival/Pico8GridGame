@@ -18,8 +18,11 @@ end
 function check_monster_bullet_collisions()
     for enemy in all(enemies) do 
         for bullet in all(bullets) do 
-            if bullet_hit_enemy(enemy, bullet) then 
-                move_unit(bullet.direction, enemy, ENEMY_BULLET_HIT_RECOIL)
+            hit = bullet_hit_enemy(enemy, bullet)
+            if hit != 0 then 
+                if hit == 2 then 
+                    move_unit(bullet.direction, enemy, ENEMY_BULLET_HIT_RECOIL)
+                end
                 enemy.type = bullet.type
                 despawn(bullet)
             end
@@ -29,14 +32,14 @@ end
 
 function bullet_hit_enemy(enemy, bullet) 
     if on_same_tile(enemy, bullet) then
-        return true
+        return 2
     else 
         bullet_previous_location = relative_location(reversed_direction(bullet.direction), bullet, 1) 
         if on_same_tile(enemy, bullet_previous_location) then
-            return true
+            return 1
         end
     end
-    return false
+    return 0
 end 
 
 function destroy_sand_water_clashes()
