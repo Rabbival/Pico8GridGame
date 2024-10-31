@@ -3,7 +3,7 @@ function _init()
 end
 
 function start_game()
-    music(0)
+    music(LEVEL_MUSIC)
     set_app_state_to_game()
     init_despawn_sprites()
     init_bullet_list()

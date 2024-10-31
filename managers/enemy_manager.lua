@@ -46,7 +46,7 @@ function move_enemy_along_path(enemy)
         next_move_direction = enemy.path[enemy.next_move_index]
         move_unit(next_move_direction, enemy, 1)
         enemy.next_move_index += 1
-        sfx(ENEMY_STEP_SOUND)
+        sfx(choose_random(ENEMY_STEP_SOUND_1, ENEMY_STEP_SOUND_2))
     end
 end
 

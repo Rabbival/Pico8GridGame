@@ -9,7 +9,7 @@ function check_monster_player_collisions()
     for enemy in all(enemies) do 
         if on_same_tile(enemy, player) then 
             sfx(PLAYER_DEATH_SOUND)
-            music(1)
+            music(VICTORY_MUSIC)
             app_state = GAME_OVER
         end
     end

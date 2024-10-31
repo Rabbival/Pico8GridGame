@@ -10,7 +10,7 @@ function spawn_bullet(location, heading_direction, bullet_type)
     bullet.type = bullet_type
     bullet.map_exit_policy = DESPAWN
     add(bullets, bullet)
-    sfx(BULLET_SHOT_SOUND)
+    sfx(choose_random(BULLET_SHOT_SOUND_1, BULLET_SHOT_SOUND_2))
 end
 
 function update_bullets()
