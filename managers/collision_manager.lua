@@ -1,3 +1,7 @@
+NO_HIT = 0
+HIT_WITHOUT_KNOCKBACK = 1
+HIT_WITH_KNOCKBACK = 2
+
 function check_collisions()
     check_monster_bullet_collisions()
     destroy_sand_water_clashes()
@@ -19,8 +23,8 @@ function check_monster_bullet_collisions()
     for enemy in all(enemies) do 
         for bullet in all(bullets) do 
             hit = bullet_hit_enemy(enemy, bullet)
-            if hit != 0 then 
-                if hit == 2 then 
+            if hit != NO_HIT then 
+                if hit == HIT_WITH_KNOCKBACK then 
                     move_unit(bullet.direction, enemy, ENEMY_BULLET_HIT_RECOIL)
                 end
                 enemy.type = bullet.type
@@ -32,14 +36,14 @@ end
 
 function bullet_hit_enemy(enemy, bullet) 
     if on_same_tile(enemy, bullet) then
-        return 2
+        return HIT_WITH_KNOCKBACK
     else 
         bullet_previous_location = relative_location(reversed_direction(bullet.direction), bullet, 1) 
         if on_same_tile(enemy, bullet_previous_location) then
-            return 1
+            return HIT_WITHOUT_KNOCKBACK
         end
     end
-    return 0
+    return NO_HIT
 end 
 
 function destroy_sand_water_clashes()
