@@ -29,11 +29,9 @@ function relative_location(direction, unit, delta)
 end
 
 function valid_tile(location)
-    if location.row > 0 and location.row <= MAP_ROW_COUNT and location.col > 0 and location.col <= MAP_COL_COUNT then
-        return true
-    else
-        return false
-    end
+    in_row_bounds = location.row > 0 and location.row <= MAP_ROW_COUNT
+    in_col_bounds = location.col > 0 and location.col <= MAP_COL_COUNT
+    return in_row_bounds and in_col_bounds
 end
 
 function on_same_tile(first, second) 
