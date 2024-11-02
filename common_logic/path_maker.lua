@@ -1,11 +1,3 @@
-
-function tile_delta(first_location, second_location)
-    delta = {}
-    delta.col = second_location.col - first_location.col
-    delta.row = second_location.row - first_location.row
-    return delta
-end
-
 function tile_delta_to_direction_seq(tile_delta)
     move_sequence = {}
     tile_delta_move_count = abs(tile_delta.col) + abs(tile_delta.row)

@@ -5,7 +5,7 @@ function _update()
         update_enemies()
         update_bullets()
         check_collisions()
-    elseif app_state != GAME_PLAYING then 
+    else
         listen_for_start_requests()
     end
 end

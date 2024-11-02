@@ -1,23 +1,9 @@
-NO_HIT = 0
-HIT_WITHOUT_KNOCKBACK = 1
-HIT_WITH_KNOCKBACK = 2
-
 function check_collisions()
     check_monster_bullet_collisions()
     destroy_sand_water_clashes()
     check_monster_player_collisions()
 end
 
-
-function check_monster_player_collisions()
-    for enemy in all(enemies) do 
-        if on_same_tile(enemy, player) then 
-            sfx(PLAYER_DEATH_SOUND)
-            music(NO_MUSIC)
-            app_state = GAME_OVER
-        end
-    end
-end
 
 function check_monster_bullet_collisions()
     for enemy in all(enemies) do 
@@ -54,5 +40,13 @@ function destroy_sand_water_clashes()
         if water_on_sand or sand_on_water then 
             despawn(enemy)
         end 
+    end
+end
+
+function check_monster_player_collisions()
+    for enemy in all(enemies) do 
+        if on_same_tile(enemy, player) then 
+            declare_game_over()
+        end
     end
 end

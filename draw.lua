@@ -1,6 +1,5 @@
 function _draw()
     cls()
-    print_text_by_game_state()
     if app_state == GAME_PLAYING then 
         draw_map()
         draw_player()
@@ -8,6 +7,7 @@ function _draw()
         draw_bullets()
         draw_despawn_sprites()
     end
+    print_text_by_game_state()
 end
 
 function draw_map()

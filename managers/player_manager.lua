@@ -19,7 +19,7 @@ end
 
 function update_player_location()
     player.just_moved = false
-    for i=1,#DIRECTIONS do 
+    for i=1,count(DIRECTIONS) do 
         direction = DIRECTIONS[i]
         if btnp(direction) then
             player.acts_this_turn += 1
@@ -39,7 +39,7 @@ function listen_for_shooting_requests()
     desired_bullet_location = relative_location(player.heading_direction, player, 1)
     if btnp(SHOOT_BUTTON) and valid_tile(desired_bullet_location) then
         player.acts_this_turn += 1
-        spawn_bullet(desired_bullet_location, player.heading_direction, player.form)
+        spawn_bullet(player_location(), player.heading_direction, player.form)
     end
 end
 

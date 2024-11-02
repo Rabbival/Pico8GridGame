@@ -17,13 +17,13 @@ function relative_location(direction, unit, delta)
     desired_location.row = unit.row
     desired_location.col = unit.col
     if direction == UP then
-        desired_location.row -= 1
+        desired_location.row -= delta
     elseif direction == RIGHT then
-        desired_location.col += 1
+        desired_location.col += delta
     elseif direction == DOWN then
-        desired_location.row += 1
+        desired_location.row += delta
     elseif direction == LEFT then
-        desired_location.col -= 1
+        desired_location.col -= delta
     end
     return desired_location
 end
@@ -36,4 +36,11 @@ end
 
 function on_same_tile(first, second) 
     return (first.col == second.col and first.row == second.row)
+end
+
+function tile_delta(first_location, second_location)
+    delta = {}
+    delta.col = second_location.col - first_location.col
+    delta.row = second_location.row - first_location.row
+    return delta
 end

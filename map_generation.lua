@@ -14,7 +14,7 @@ function generate_row()
     row = {}
     tile_count_dictionary = initialize_tile_count_dictionary()
     for index=1,MAP_COL_COUNT do
-        chosen_tile_identifier = pick_random_tile(tile_count_dictionary)
+        chosen_tile_identifier = pick_random_tile_type(tile_count_dictionary)
         for i=1,count(tile_count_dictionary) do 
             if chosen_tile_identifier == tile_count_dictionary[i].key then 
                 tile_count_dictionary[i].value -= 1
@@ -36,13 +36,13 @@ function initialize_tile_count_dictionary()
     return tile_count_dictionary
 end
 
-function pick_random_tile(tile_count_dictionary)
-    non_zeros = {}
+function pick_random_tile_type(tile_count_dictionary)
+    choosable_tile_types = {}
     for i=1,count(tile_count_dictionary) do 
         if tile_count_dictionary[i].value != 0 then 
-            add(non_zeros, tile_count_dictionary[i].key)
+            add(choosable_tile_types, tile_count_dictionary[i].key)
         end
     end
-    chosen_tile_type_index = rnd_whole_exc(1, count(non_zeros)+1)
-    return non_zeros[chosen_tile_type_index]
+    chosen_tile_type_index = rnd_whole_exc(1, count(choosable_tile_types)+1)
+    return choosable_tile_types[chosen_tile_type_index]
 end

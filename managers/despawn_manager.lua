@@ -12,8 +12,7 @@ function despawn(unit)
     if enemies_count_before > count(enemies) then 
         sfx(choose_random(ENEMY_DEATH_SOUND_1, ENEMY_DEATH_SOUND_2))
         if count(enemies) == 0 then 
-            music(VICTORY_MUSIC)
-            app_state = GAME_WON
+            declare_victory()
         end
     end
     if bullets_count_before > count(bullets) then 

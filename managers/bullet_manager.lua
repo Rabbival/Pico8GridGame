@@ -14,7 +14,7 @@ function spawn_bullet(location, heading_direction, bullet_type)
 end
 
 function update_bullets()
-    if player.just_moved then 
+    for i=1,player.acts_this_turn do 
         update_bullet_locations()
     end
 end
