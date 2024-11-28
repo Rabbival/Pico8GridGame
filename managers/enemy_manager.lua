@@ -8,8 +8,8 @@ end
 
 function spawn_enemy()
     enemy = {}
-    enemy.row = rnd_exclude_range(1, MAP_ROW_COUNT, player.row-1, player.row+1)
-    enemy.col = rnd_exclude_range(1, MAP_COL_COUNT, player.col-1, player.col+1)
+    enemy.row = rnd_exclude_range(1, MAP_ROW_COUNT, player.row-3, player.row+3)
+    enemy.col = rnd_exclude_range(1, MAP_COL_COUNT, player.col-3, player.col+3)
     enemy.path = determine_path_to_player(enemy)
     enemy.next_move_index = 1
     enemy.heading_direction = enemy.path[1]

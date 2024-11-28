@@ -22,11 +22,15 @@ function update_player_location()
     for i=1,count(DIRECTIONS) do 
         direction = DIRECTIONS[i]
         if btnp(direction) then
-            player.acts_this_turn += 1
-            player.just_moved = true
-            player.heading_direction = direction
-            move_unit(direction, player, 1)
-            break
+            if direction != player.heading_direction then
+                player.heading_direction = direction
+                break
+            else
+                player.acts_this_turn += 1
+                player.just_moved = true
+                move_unit(direction, player, 1)
+                break
+            end
         end
     end
 end
